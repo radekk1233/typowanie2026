@@ -67,6 +67,7 @@
       <option value="Stany Zjednoczone">Stany Zjednoczone</option>
     </select>
     <button onclick="setWinner()">Zapisz zwycięzcę</button>
+    <button onclick="resetWinner()">Cofnij wybór</button> <!-- Przycisk do cofania wyboru -->
   </div>
 
   <!-- Wyniki -->
@@ -131,6 +132,13 @@
       updateResults();
     }
 
+    function resetWinner() {
+      finalWinner = ""; // Cofnięcie wyboru zwycięzcy
+      document.getElementById("zwyciezca").value = ""; // Czyszczenie formularza
+      alert("Cofnięto wybór zwycięzcy.");
+      updateResults(); // Odświeżenie wyników
+    }
+
     function loadData() {
       const mecze = JSON.parse(document.getElementById("mecze").textContent);
       const uczestnicy = JSON.parse(document.getElementById("uczestnicy").textContent);
@@ -187,7 +195,7 @@
           </tr>
         </thead>
         <tbody>
-          ${tabela.map(u => `
+          ${tabela.map(u => ` 
             <tr>
               <td>${u.name}</td>
               <td>${u.flaga ? `<img src="https://flagcdn.com/24x18/${u.flaga}.png" alt="${u.flaga}" />` : ""}</td>
