@@ -41,7 +41,7 @@
 </head>
 <body>
   <h1>🏆 Typowanie Mistrzostw Świata</h1>
-  
+
   <!-- Wyniki -->
   <h2>🏅 Aktualna tabela wyników</h2>
   <div id="table-container"></div>
@@ -78,10 +78,21 @@
   ]</script>
 
   <script type="application/json" id="kraje">{
-    "Argentyna": "🇦🇷",
-    "Francja": "🇫🇷",
-    "Brazylia": "🇧🇷",
-    "Niemcy": "🇩🇪"
+    "Argentyna": "ar",
+    "Francja": "fr",
+    "Brazylia": "br",
+    "Niemcy": "de",
+    "Hiszpania": "es",
+    "Anglia": "gb",
+    "Włochy": "it",
+    "Holandia": "nl",
+    "Portugalia": "pt",
+    "Belgia": "be",
+    "Chorwacja": "hr",
+    "Urugwaj": "uy",
+    "Szwajcaria": "ch",
+    "Dania": "dk",
+    "Stany Zjednoczone": "us"
   }</script>
 
   <script>
@@ -97,7 +108,6 @@
         }
       });
 
-      // Tabela uczestników
       const tabela = uczestnicy.map(u => {
         let punkty = 0;
         Object.entries(u.predictions).forEach(([id, typ]) => {
@@ -133,7 +143,6 @@
 
       tabela.sort((a, b) => b.suma - a.suma);
 
-      // Generowanie tabeli z wynikami
       const container = document.getElementById("table-container");
       const table = document.createElement("table");
       table.innerHTML = `
@@ -150,7 +159,7 @@
           ${tabela.map(u => `
             <tr>
               <td>${u.name}</td>
-              <td>${u.flaga}</td>
+              <td>${u.flaga ? `<img src="https://flagcdn.com/24x18/${u.flaga}.png" alt="${u.flaga}" />` : ""}</td>
               <td>${u.punkty}</td>
               <td>${u.bonus}</td>
               <td>${u.suma}</td>
@@ -160,7 +169,6 @@
       `;
       container.appendChild(table);
 
-      // Generowanie tabeli z meczami i typami uczestników
       const meczeTable = document.getElementById("mecze-table");
       const meczTable = mecze.map(mecz => {
         const date = new Date(mecz.date);
@@ -181,20 +189,20 @@
                 ${uczestnicy.map(u => {
                   const typ = u.predictions[mecz.id];
                   if (!typ) return '';
-                 let color = "";
-if (wyniki[mecz.id]) {
-  if (typ.score1 === wyniki[mecz.id][0] && typ.score2 === wyniki[mecz.id][1]) {
-    color = "green";
-  } else if (
-    (typ.score1 > typ.score2 && wyniki[mecz.id][0] > wyniki[mecz.id][1]) ||
-    (typ.score1 < typ.score2 && wyniki[mecz.id][0] < wyniki[mecz.id][1]) ||
-    (typ.score1 === typ.score2 && wyniki[mecz.id][0] === wyniki[mecz.id][1])
-  ) {
-    color = "orange";
-  } else {
-    color = "red";
-  }
-}
+                  let color = "";
+                  if (wyniki[mecz.id]) {
+                    if (typ.score1 === wyniki[mecz.id][0] && typ.score2 === wyniki[mecz.id][1]) {
+                      color = "green";
+                    } else if (
+                      (typ.score1 > typ.score2 && wyniki[mecz.id][0] > wyniki[mecz.id][1]) ||
+                      (typ.score1 < typ.score2 && wyniki[mecz.id][0] < wyniki[mecz.id][1]) ||
+                      (typ.score1 === typ.score2 && wyniki[mecz.id][0] === wyniki[mecz.id][1])
+                    ) {
+                      color = "orange";
+                    } else {
+                      color = ""; // brak koloru jeśli źle, ale brak wyniku
+                    }
+                  }
                   return `
                     <tr class="${color}">
                       <td>${u.name}</td>
