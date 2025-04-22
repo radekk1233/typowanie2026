@@ -124,16 +124,19 @@
   }</script>
 
   <script>
-    let finalWinner = ""; // Zmienna do przechowywania zwycięzcy turnieju
+    // Sprawdzenie, czy zwycięzca jest zapisany w localStorage
+    let finalWinner = localStorage.getItem("finalWinner") || ""; 
 
     function setWinner() {
       finalWinner = document.getElementById("zwyciezca").value;
+      localStorage.setItem("finalWinner", finalWinner); // Zapisanie zwycięzcy w localStorage
       alert("Zwycięzca turnieju zapisany jako: " + finalWinner);
       updateResults();
     }
 
     function resetWinner() {
       finalWinner = ""; // Cofnięcie wyboru zwycięzcy
+      localStorage.removeItem("finalWinner"); // Usunięcie zwycięzcy z localStorage
       document.getElementById("zwyciezca").value = ""; // Czyszczenie formularza
       alert("Cofnięto wybór zwycięzcy.");
       updateResults(); // Odświeżenie wyników
