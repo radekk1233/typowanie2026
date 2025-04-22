@@ -181,8 +181,20 @@
                 ${uczestnicy.map(u => {
                   const typ = u.predictions[mecz.id];
                   if (!typ) return '';
-                  const color = (typ.score1 === wyniki[mecz.id]?.[0] && typ.score2 === wyniki[mecz.id]?.[1]) ? 'green' :
-                               (typ.score1 !== wyniki[mecz.id]?.[0] && typ.score2 !== wyniki[mecz.id]?.[1]) ? 'red' : 'orange';
+                 let color = "";
+if (wyniki[mecz.id]) {
+  if (typ.score1 === wyniki[mecz.id][0] && typ.score2 === wyniki[mecz.id][1]) {
+    color = "green";
+  } else if (
+    (typ.score1 > typ.score2 && wyniki[mecz.id][0] > wyniki[mecz.id][1]) ||
+    (typ.score1 < typ.score2 && wyniki[mecz.id][0] < wyniki[mecz.id][1]) ||
+    (typ.score1 === typ.score2 && wyniki[mecz.id][0] === wyniki[mecz.id][1])
+  ) {
+    color = "orange";
+  } else {
+    color = "red";
+  }
+}
                   return `
                     <tr class="${color}">
                       <td>${u.name}</td>
