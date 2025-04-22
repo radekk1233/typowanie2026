@@ -37,10 +37,37 @@
     .match-row {
       padding: 10px;
     }
+    #zwyciezca-container {
+      margin-top: 20px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <h1>🏆 Typowanie Mistrzostw Świata</h1>
+
+  <!-- Formularz na zwycięzcę -->
+  <div id="zwyciezca-container">
+    <h3>Podaj zwycięzcę turnieju:</h3>
+    <select id="zwyciezca">
+      <option value="Brazylia">Brazylia</option>
+      <option value="Francja">Francja</option>
+      <option value="Argentyna">Argentyna</option>
+      <option value="Niemcy">Niemcy</option>
+      <option value="Hiszpania">Hiszpania</option>
+      <option value="Anglia">Anglia</option>
+      <option value="Włochy">Włochy</option>
+      <option value="Holandia">Holandia</option>
+      <option value="Portugalia">Portugalia</option>
+      <option value="Belgia">Belgia</option>
+      <option value="Chorwacja">Chorwacja</option>
+      <option value="Urugwaj">Urugwaj</option>
+      <option value="Szwajcaria">Szwajcaria</option>
+      <option value="Dania">Dania</option>
+      <option value="Stany Zjednoczone">Stany Zjednoczone</option>
+    </select>
+    <button onclick="setWinner()">Zapisz zwycięzcę</button>
+  </div>
 
   <!-- Wyniki -->
   <h2>🏅 Aktualna tabela wyników</h2>
@@ -96,6 +123,14 @@
   }</script>
 
   <script>
+    let finalWinner = ""; // Zmienna do przechowywania zwycięzcy turnieju
+
+    function setWinner() {
+      finalWinner = document.getElementById("zwyciezca").value;
+      alert("Zwycięzca turnieju zapisany jako: " + finalWinner);
+      updateResults();
+    }
+
     function loadData() {
       const mecze = JSON.parse(document.getElementById("mecze").textContent);
       const uczestnicy = JSON.parse(document.getElementById("uczestnicy").textContent);
@@ -124,12 +159,8 @@
         });
 
         let bonus = 0;
-        const final = mecze.find(m => m.id === 1);
-        if (final.score1 !== null && final.score2 !== null) {
-          const zwyciezca = final.score1 > final.score2 ? final.team1 : (final.score2 > final.score1 ? final.team2 : null);
-          if (zwyciezca && zwyciezca === u.winner) {
-            bonus = 10;
-          }
+        if (finalWinner && finalWinner === u.winner) {
+          bonus = 10; // Przyznanie bonusowych punktów za trafienie zwycięzcy
         }
 
         return {
@@ -218,6 +249,11 @@
       }).join('');
       
       meczeTable.innerHTML = meczTable;
+    }
+
+    // Funkcja aktualizująca tabelę wyników po zapisaniu zwycięzcy
+    function updateResults() {
+      loadData();
     }
 
     loadData();
