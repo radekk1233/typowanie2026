@@ -50,16 +50,16 @@
   <h2>⚽ Wyniki meczów i typy uczestników</h2>
   <div id="mecze-table"></div>
 
-  <script type="application/json" id="mecze">[
+  <script type="application/json" id="mecze">[ 
     { "id": 1, "team1": "Argentyna", "team2": "Polska", "date": "2022-12-18", "score1": 3, "score2": 1 },
     { "id": 2, "team1": "Argentyna", "team2": "Francja", "date": "2022-12-18", "score1": 3, "score2": 1 },
     { "id": 3, "team1": "Brazylia", "team2": "Niemcy", "date": "2022-12-17", "score1": null, "score2": null }
   ]</script>
 
-  <script type="application/json" id="uczestnicy">[
-    {
-      "name": "Ania",
-      "winner": "Brazylia",
+  <script type="application/json" id="uczestnicy">[ 
+    { 
+      "name": "Ania", 
+      "winner": "Brazylia", 
       "predictions": {
         "1": { "score1": 3, "score2": 1 },
         "2": { "score1": 7, "score2": 2 },
@@ -168,7 +168,7 @@
         return `
           <div class="match-row">
             <strong>${matchDate}</strong> - ${mecz.team1} vs ${mecz.team2}  
-            ${wyniki[mecz.id] ? `| Wynik: ${wyniki[mecz.id][0]} - ${wyniki[mecz.id][1]}` : ""}
+            ${wyniki[mecz.id] ? `| Wynik: ${wyniki[mecz.id][0]} - ${wyniki[mecz.id][1]}` : "| Wynik: Oczekiwany"}
             <table>
               <thead>
                 <tr>
