@@ -214,7 +214,7 @@
       const meczeTable = document.getElementById("mecze-table");
       const meczTable = mecze.map(mecz => {
         const date = new Date(mecz.date);
-        const matchDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+        const matchDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
         return `
           <div class="match-row">
             <strong>${matchDate}</strong> - ${mecz.team1} vs ${mecz.team2}  
