@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typowanie Mistrzostw Świata</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f2f2f2;
+    }
+    h1, h2, h3 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .green { background-color: #4CAF50; color: white; }
+    .orange { background-color: #FFA500; color: white; }
+    .red { background-color: #FF6347; color: white; }
+    #mecze-table {
+      margin-top: 40px;
+    }
+    .match-row {
+      padding: 10px;
+    }
+    #zwyciezca-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏆 Typowanie Mistrzostw Świata</h1>
+
+  <!-- Formularz na zwycięzcę -->
+  <div id="zwyciezca-container">
+    <h3>Podaj zwycięzcę turnieju:</h3>
+    <select id="zwyciezca">
+      <option value="Brazylia">Brazylia</option>
+      <option value="Francja">Francja</option>
+      <option value="Argentyna">Argentyna</option>
+      <option value="Niemcy">Niemcy</option>
+      <option value="Hiszpania">Hiszpania</option>
+      <option value="Anglia">Anglia</option>
+      <option value="Włochy">Włochy</option>
+      <option value="Holandia">Holandia</option>
+      <option value="Portugalia">Portugalia</option>
+      <option value="Belgia">Belgia</option>
+      <option value="Chorwacja">Chorwacja</option>
+      <option value="Urugwaj">Urugwaj</option>
+      <option value="Szwajcaria">Szwajcaria</option>
+      <option value="Dania">Dania</option>
+      <option value="Stany Zjednoczone">Stany Zjednoczone</option>
+    </select>
+    <button onclick="setWinner()">Zapisz zwycięzcę</button>
+    <button onclick="resetWinner()">Cofnij wybór</button>
+  </div>
+
+  <!-- Wyniki -->
+  <h2>🏅 Aktualna tabela wyników</h2>
+  <div id="table-container"></div>
+
+  <!-- Meczów -->
+  <h2>⚽ Wyniki meczów i typy uczestników</h2>
+  <div id="mecze-table"></div>
+
+  <!-- Dane -->
+  <script type="application/json" id="mecze">[
+    { "id": 1, "round": "Kolejka 1", "team1": "Argentyna", "team2": "Polska", "date": "2022-12-18T15:00:00", "score1": null, "score2": null },
+    { "id": 2, "round": "Kolejka 1", "team1": "Brazylia", "team2": "Niemcy", "date": "2022-12-17T20:00:00", "score1": null, "score2": null },
+    { "id": 3, "round": "Kolejka 2", "team1": "Argentyna", "team2": "Francja", "date": "2022-12-18T17:00:00", "score1": null, "score2": null },
+    { "id": 4, "round": "Ćwierćfinał", "team1": "Hiszpania", "team2": "Anglia", "date": "2022-12-20T18:00:00", "score1": null, "score2": null },
+    { "id": 5, "round": "Półfinał", "team1": "Francja", "team2": "Brazylia", "date": "2022-12-22T20:00:00", "score1": null, "score2": null },
+    { "id": 6, "round": "Finał", "team1": "Argentyna", "team2": "Francja", "date": "2022-12-24T21:00:00", "score1": null, "score2": null }
+  ]</script>
+
+  <script type="application/json" id="uczestnicy">[ 
+    { "name": "Radek", "winner": "Brazylia", "predictions": { "1": {"score1":3,"score2":1}, "2": {"score1":2,"score2":2}, "3": {"score1":1,"score2":1}, "4": {"score1":0,"score2":1}, "5": {"score1":2,"score2":3}, "6": {"score1":1,"score2":2} } },
+    { "name": "Weronika", "winner": "Portugalia", "predictions": { "1": {"score1":3,"score2":1}, "2": {"score1":2,"score2":2}, "3": {"score1":1,"score2":1}, "4": {"score1":0,"score2":1}, "5": {"score1":2,"score2":3}, "6": {"score1":1,"score2":2} } }
+  ]</script>
+
+  <script type="application/json" id="kraje">{
+    "Argentyna": "ar", "Francja": "fr", "Brazylia": "br", "Niemcy": "de", "Hiszpania": "es",
+    "Anglia": "gb", "Włochy": "it", "Holandia": "nl", "Portugalia": "pt", "Belgia": "be",
+    "Chorwacja": "hr", "Urugwaj": "uy", "Szwajcaria": "ch", "Dania": "dk", "Stany Zjednoczone": "us"
+  }</script>
+
+  <script>
+    let finalWinner = localStorage.getItem("finalWinner") || ""; 
+
+    function setWinner() {
+      finalWinner = document.getElementById("zwyciezca").value;
+      localStorage.setItem("finalWinner", finalWinner);
+      alert("Zwycięzca turnieju zapisany jako: " + finalWinner);
+      updateResults();
+    }
+
+    function resetWinner() {
+      finalWinner = "";
+      localStorage.removeItem("finalWinner");
+      document.getElementById("zwyciezca").value = "";
+      alert("Cofnięto wybór zwycięzcy.");
+      updateResults();
+    }
+
+    function loadData() {
+      const mecze = JSON.parse(document.getElementById("mecze").textContent);
+      const uczestnicy = JSON.parse(document.getElementById("uczestnicy").textContent);
+      const kraje = JSON.parse(document.getElementById("kraje").textContent);
+
+      const wyniki = {};
+      mecze.forEach(m => { if(m.score1!==null&&m.score2!==null) wyniki[m.id]=[m.score1,m.score2]; });
+
+      // Tabela wyników
+      const tabela = uczestnicy.map(u => {
+        let punkty=0;
+        Object.entries(u.predictions).forEach(([id,typ])=>{
+          const wynik = wyniki[id];
+          if(!wynik) return;
+          const [r1,r2] = wynik;
+          if(typ.score1===r1 && typ.score2===r2) punkty+=3;
+          else if ((typ.score1>typ.score2 && r1>r2)||(typ.score1<typ.score2 && r1<r2)||(typ.score1===typ.score2 && r1===r2)) punkty+=1;
+        });
+        let bonus=0;
+        if(finalWinner && finalWinner===u.winner) bonus=10;
+        return { name:u.name, flaga:kraje[u.winner]||"", punkty, bonus, suma: punkty+bonus };
+      });
+      tabela.sort((a,b)=>b.suma-a.suma);
+
+      const container=document.getElementById("table-container");
+      container.innerHTML="";
+      const table=document.createElement("table");
+      table.innerHTML=`
+        <thead>
+          <tr><th>Uczestnik</th><th>Flaga</th><th>Punkty</th><th>Bonus</th><th>Suma</th></tr>
+        </thead>
+        <tbody>
+          ${tabela.map(u=>`
+            <tr>
+              <td>${u.name}</td>
+              <td>${u.flaga?`<img src="https://flagcdn.com/24x18/${u.flaga}.png" alt="${u.flaga}" />`:''}</td>
+              <td>${u.punkty}</td>
+              <td>${u.bonus}</td>
+              <td>${u.suma}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      `;
+      container.appendChild(table);
+
+      // Mecze pogrupowane po rundach
+      const meczePoKolejkach = {};
+      mecze.forEach(m=>{
+        if(!meczePoKolejkach[m.round]) meczePoKolejkach[m.round]=[];
+        meczePoKolejkach[m.round].push(m);
+      });
+
+      const meczeTable=document.getElementById("mecze-table");
+      const meczTableHtml=Object.entries(meczePoKolejkach).map(([round,roundMatches])=>{
+        return `
+          <h3 style="margin-top:40px;">🏟️ ${round}</h3>
+          ${roundMatches.map(m=>{
+            const date=new Date(m.date);
+            const matchDate=`${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()} ${date.getHours()}:${String(date.getMinutes()).padStart(2,'0')}`;
+            return `
+              <div class="match-row">
+                <strong>${matchDate}</strong> – ${m.team1} vs ${m.team2} ${wyniki[m.id]?`| Wynik: ${wyniki[m.id][0]} - ${wyniki[m.id][1]}`:"| Wynik: Oczekiwany"}
+                <table>
+                  <thead>
+                    <tr><th>Uczestnik</th><th>Typ</th><th>Wynik</th></tr>
+                  </thead>
+                  <tbody>
+                    ${uczestnicy.map(u=>{
+                      const typ=u.predictions[m.id];
+                      if(!typ) return '';
+                      let color="";
+                      if(wyniki[m.id]){
+                        if(typ.score1===wyniki[m.id][0] && typ.score2===wyniki[m.id][1]) color="green";
+                        else if((typ.score1>typ.score2 && wyniki[m.id][0]>wyniki[m.id][1])||(typ.score1<typ.score2 && wyniki[m.id][0]<wyniki[m.id][1])||(typ.score1===typ.score2 && wyniki[m.id][0]===wyniki[m.id][1])) color="orange";
+                        else color="red";
+                      }
+                      return `<tr class="${color}"><td>${u.name}</td><td>${typ.score1} - ${typ.score2}</td><td>${wyniki[m.id]?wyniki[m.id][0]+" - "+wyniki[m.id][1]:"?"}</td></tr>`;
+                    }).join('')}
+                  </tbody>
+                </table>
+              </div>
+            `;
+          }).join('')}
+        `;
+      }).join('');
+      meczeTable.innerHTML=meczTableHtml;
+    }
+
+    function updateResults(){ loadData(); }
+    loadData();
+  </script>
+</body>
+</html>
