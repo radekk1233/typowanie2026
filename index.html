@@ -1161,7 +1161,7 @@
 "102": {"score1": null, "score2": null},
 "103": {"score1": null, "score2": null},
 "104": {"score1": null, "score2": null}}},
-{"name":"Babcia Kazia ","winner":"Brazylia",
+{"name":"Babcia Kazia ","winner":"Hiszpania",
     "predictions":{
 "1": {"score1": null, "score2": null},
 "2": {"score1": null, "score2": null},
@@ -1311,11 +1311,19 @@
       });
       tabela.sort((a,b)=>b.suma-a.suma);
 
+      const medale = ["🥇", "🥈", "🥉"];
       const container=document.getElementById("table-container");
       container.innerHTML="";
       const table=document.createElement("table");
       table.innerHTML=`<thead><tr><th>Uczestnik</th><th>Flaga</th><th>Punkty</th><th>Bonus</th><th>Suma</th></tr></thead>
-        <tbody>${tabela.map(u=>`<tr><td>${u.name}</td><td>${u.flaga?`<img src="https://flagcdn.com/24x18/${u.flaga}.png" alt="${u.flaga}" />`:''}</td><td>${u.punkty}</td><td>${u.bonus}</td><td>${u.suma}</td></tr>`).join('')}</tbody>`;
+        <tbody>${tabela.map((u, index)=>`
+  <tr>
+    <td>
+  ${index === 0 ? "👑 " : ""}
+  ${index < 3 ? medale[index] + " " : ""}
+  ${u.bonus === 10 ? "🏆 " : ""}
+  ${u.name}
+</td><td>${u.flaga?`<img src="https://flagcdn.com/24x18/${u.flaga}.png" alt="${u.flaga}" />`:''}</td><td>${u.punkty}</td><td>${u.bonus}</td><td>${u.suma}</td></tr>`).join('')}</tbody>`;
       container.appendChild(table);
 
       // Mecze pogrupowane po rundach
