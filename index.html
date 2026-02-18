@@ -96,6 +96,15 @@
 
   <!-- Mecze -->
   <h2>⚽ Wyniki meczów i typy uczestników</h2>
+  <div style="text-align:center; margin-bottom:20px;">
+  <input 
+    type="text" 
+    id="teamSearch" 
+    placeholder="🔎 Wpisz nazwę drużyny (np. Francja)" 
+    onkeyup="filterMatches()"
+    style="padding:8px; width:300px; border-radius:5px; border:1px solid #ccc;"
+  >
+</div>
   <div id="mecze-table"></div>
 
   <!-- Dane -->
@@ -111,7 +120,7 @@
   {"id":6, "round":"Kolejka 1", "team1":"Brazylia", "team2":"Maroko", "date":"2026-06-14T00:00:00", "score1":null, "score2":null},
   {"id":7, "round":"Kolejka 1", "team1":"Haiti", "team2":"Szkocja", "date":"2026-06-14T03:00:00", "score1":null, "score2":null},
   {"id":8, "round":"Kolejka 1", "team1":"Australia", "team2":"UEFA Playoff C", "date":"2026-06-14T06:00:00", "score1":null, "score2":null},
-  {"id":9, "round":"Kolejka 1", "team1":"Niemcy", "team2":"Curaçao", "date":"2026-06-14T19:00:00", "score1":null, "score2":null},
+  {"id":9, "round":"Kolejka 1", "team1":"Niemcy", "team2":"Curacao", "date":"2026-06-14T19:00:00", "score1":null, "score2":null},
   {"id":10, "round":"Kolejka 1", "team1":"Holandia", "team2":"Japonia", "date":"2026-06-14T22:00:00", "score1":null, "score2":null},
  
   {"id":11, "round":"Kolejka 1", "team1":"Wybrzeże Kości Słoniowej", "team2":"Ekwador", "date":"2026-06-15T01:00:00", "score1":null, "score2":null},
@@ -123,7 +132,7 @@
   {"id":16, "round":"Kolejka 1", "team1":"Iran", "team2":"Nowa Zelandia", "date":"2026-06-16T03:00:00", "score1":null, "score2":null},
   {"id":17, "round":"Kolejka 1", "team1":"Francja", "team2":"Senegal", "date":"2026-06-16T21:00:00", "score1":null, "score2":null},
   
-  {"id":18, "round":"Kolejka 1", "team1":"Intercontinental Playoff 2", "team2":"Norwegia", "date":"2026-06-17T00:00:00", "score1":null, "score2":null},
+  {"id":18, "round":"Kolejka 1", "team1":"FIFA 2", "team2":"Norwegia", "date":"2026-06-17T00:00:00", "score1":null, "score2":null},
   {"id":19, "round":"Kolejka 1", "team1":"Argentyna", "team2":"Algieria", "date":"2026-06-17T03:00:00", "score1":null, "score2":null},
   {"id":20, "round":"Kolejka 1", "team1":"Austria", "team2":"Jordania", "date":"2026-06-17T06:00:00", "score1":null, "score2":null},
   {"id":21, "round":"Kolejka 1", "team1":"Portugalia", "team2":"Intercontinental Playoff 1", "date":"2026-06-17T19:00:00", "score1":null, "score2":null},
@@ -132,65 +141,65 @@
   {"id":23, "round":"Kolejka 1", "team1":"Ghana", "team2":"Panama", "date":"2026-06-18T01:00:00", "score1":null, "score2":null},
   {"id":24, "round":"Kolejka 1", "team1":"Uzbekistan", "team2":"Kolumbia", "date":"2026-06-18T04:00:00", "score1":null, "score2":null},
   
-  {"id":25, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":26, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
+  {"id":25, "round":"Kolejka 2", "team1":"UEFA D", "team2":"RPA", "date":"2026-06-18T18:00:00", "score1":null, "score2":null},
+  {"id":26, "round":"Kolejka 2", "team1":"Szwajcaria", "team2":"UEFA A", "date":"2026-06-18T21:00:00", "score1":null, "score2":null},
   
-  {"id":27, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":28, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":29, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
+  {"id":27, "round":"Kolejka 2", "team1":"Kanada", "team2":"Katar", "date":"2026-06-19T00:00:00", "score1":null, "score2":null},
+  {"id":28, "round":"Kolejka 2", "team1":"Meksyk", "team2":"Korea Południowa", "date":"2026-06-19T03:00:00", "score1":null, "score2":null},
+  {"id":29, "round":"Kolejka 2", "team1":"USA", "team2":"Australia", "date":"2026-06-19T21:00:00", "score1":null, "score2":null},
   
-  {"id":30, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":31, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":32, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":33, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":34, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
+  {"id":30, "round":"Kolejka 2", "team1":"Szkocja", "team2":"Maroko", "date":"2026-06-20T00:00:00", "score1":null, "score2":null},
+  {"id":31, "round":"Kolejka 2", "team1":"Brazylia", "team2":"Haiti", "date":"2026-06-20T03:00:00", "score1":null, "score2":null},
+  {"id":32, "round":"Kolejka 2", "team1":"UEFA C", "team2":"Paragwaj", "date":"2026-06-20T06:00:00", "score1":null, "score2":null},
+  {"id":33, "round":"Kolejka 2", "team1":"Holandia", "team2":"UEFA B", "date":"2026-06-20T19:00:00", "score1":null, "score2":null},
+  {"id":34, "round":"Kolejka 2", "team1":"Niemcy", "team2":"WKS", "date":"2026-06-20T22:00:00", "score1":null, "score2":null},
   
-  {"id":35, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":36, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":37, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":38, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
+  {"id":35, "round":"Kolejka 2", "team1":"Ekwador", "team2":"Curacao", "date":"2026-06-21T02:00:00", "score1":null, "score2":null},
+  {"id":36, "round":"Kolejka 2", "team1":"Tunezja", "team2":"Japonia", "date":"2026-06-21T06:00:00", "score1":null, "score2":null},
+  {"id":37, "round":"Kolejka 2", "team1":"Hiszpania", "team2":"Arabia Saudyjska", "date":"2026-06-21T18:00:00", "score1":null, "score2":null},
+  {"id":38, "round":"Kolejka 2", "team1":"Belgia", "team2":"Iran", "date":"2026-06-21T21:00:00", "score1":null, "score2":null},
   
-  {"id":39, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":40, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":41, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":42, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
+  {"id":39, "round":"Kolejka 2", "team1":"Urugwaj", "team2":"Republika Zielonego Przylądka", "date":"2026-06-22T00:00:00", "score1":null, "score2":null},
+  {"id":40, "round":"Kolejka 2", "team1":"Nowa Zelandia", "team2":"Egipt", "date":"2026-06-22T03:00:00", "score1":null, "score2":null},
+  {"id":41, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Austria", "date":"2026-06-22T19:00:00", "score1":null, "score2":null},
+  {"id":42, "round":"Kolejka 2", "team1":"Francja", "team2":"FIFA 2", "date":"2026-06-22T23:00:00", "score1":null, "score2":null},
   
-  {"id":43, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":44, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":45, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":46, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
+  {"id":43, "round":"Kolejka 2", "team1":"Norwegia", "team2":"Senegal", "date":"2026-06-23T02:00:00", "score1":null, "score2":null},
+  {"id":44, "round":"Kolejka 2", "team1":"Jordania", "team2":"Algieria", "date":"2026-06-23T05:00:00", "score1":null, "score2":null},
+  {"id":45, "round":"Kolejka 2", "team1":"Portugalia", "team2":"Uzbekistan", "date":"2026-06-23T19:00:00", "score1":null, "score2":null},
+  {"id":46, "round":"Kolejka 2", "team1":"Anglia", "team2":"Ghana", "date":"2026-06-23T22:00:00", "score1":null, "score2":null},
   
-  {"id":47, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-06-18T15:00:00", "score1":null, "score2":null},
-  {"id":48, "round":"Kolejka 2", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
+  {"id":47, "round":"Kolejka 2", "team1":"Panama", "team2":"Chorwacja", "date":"2026-06-24T01:00:00", "score1":null, "score2":null},
+  {"id":48, "round":"Kolejka 2", "team1":"Kolumbia", "team2":"FIFA 1", "date":"2026-06-24T04:00:00", "score1":null, "score2":null},
   
-  {"id":49, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":50, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
+  {"id":49, "round":"Kolejka 3", "team1":"Szwajcaria", "team2":"Kanada", "date":"2026-06-24T21:00:00", "score1":null, "score2":null},
+  {"id":50, "round":"Kolejka 3", "team1":"UEFA A", "team2":"Katar", "date":"2026-06-24T21:00:00", "score1":null, "score2":null},
   
-  {"id":51, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":52, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":53, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":54, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":55, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":56, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
+  {"id":51, "round":"Kolejka 3", "team1":"Maroko", "team2":"Haiti", "date":"2026-06-25T00:00:00", "score1":null, "score2":null},
+  {"id":52, "round":"Kolejka 3", "team1":"Szkocja", "team2":"Brazylia", "date":"2026-06-25T00:00:00", "score1":null, "score2":null},
+  {"id":53, "round":"Kolejka 3", "team1":"RPA", "team2":"Korea Południowa", "date":"2026-06-25T03:00:00", "score1":null, "score2":null},
+  {"id":54, "round":"Kolejka 3", "team1":"UEFA D", "team2":"Meksyk", "date":"2026-06-25T03:00:00", "score1":null, "score2":null},
+  {"id":55, "round":"Kolejka 3", "team1":"Curacao", "team2":"WKS", "date":"2026-06-25T22:00:00", "score1":null, "score2":null},
+  {"id":56, "round":"Kolejka 3", "team1":"Ekwador", "team2":"Niemcy", "date":"2026-06-25T22:00:00", "score1":null, "score2":null},
   
-  {"id":57, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":58, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":59, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":60, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":61, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":62, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
+  {"id":57, "round":"Kolejka 3", "team1":"Japonia", "team2":"UEFA B", "date":"2026-06-26T01:00:00", "score1":null, "score2":null},
+  {"id":58, "round":"Kolejka 3", "team1":"Tunezja", "team2":"Holandia", "date":"2026-06-26T01:00:00", "score1":null, "score2":null},
+  {"id":59, "round":"Kolejka 3", "team1":"Paragwaj", "team2":"Australia", "date":"2026-06-26T04:00:00", "score1":null, "score2":null},
+  {"id":60, "round":"Kolejka 3", "team1":"UEFA C", "team2":"USA", "date":"2026-06-26T04:00:00", "score1":null, "score2":null},
+  {"id":61, "round":"Kolejka 3", "team1":"Norwegia", "team2":"Francja", "date":"2026-06-26T21:00:00", "score1":null, "score2":null},
+  {"id":62, "round":"Kolejka 3", "team1":"Senegal", "team2":"FIFA 2", "date":"2026-06-26T21:00:00", "score1":null, "score2":null},
   
-  {"id":63, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":64, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":65, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":66, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":67, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":68, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
+  {"id":63, "round":"Kolejka 3", "team1":"Republika Zielonego Przylądka", "team2":"Arabia Saudyjska", "date":"2026-06-27T02:00:00", "score1":null, "score2":null},
+  {"id":64, "round":"Kolejka 3", "team1":"Urugwaj", "team2":"Hiszpania", "date":"2026-06-27T02:00:00", "score1":null, "score2":null},
+  {"id":65, "round":"Kolejka 3", "team1":"Egipt", "team2":"Iran", "date":"2026-06-27T05:00:00", "score1":null, "score2":null},
+  {"id":66, "round":"Kolejka 3", "team1":"Nowa Zelandia", "team2":"Belgia", "date":"2026-06-27T05:00:00", "score1":null, "score2":null},
+  {"id":67, "round":"Kolejka 3", "team1":"Chorwacja", "team2":"Ghana", "date":"2026-06-27T23:00:00", "score1":null, "score2":null},
+  {"id":68, "round":"Kolejka 3", "team1":"Panama", "team2":"Anglia", "date":"2026-06-27T23:00:00", "score1":null, "score2":null},
   
-  {"id":69, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":70, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":71, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
-  {"id":72, "round":"Kolejka 3", "team1":"Argentyna", "team2":"Polska", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
+  {"id":69, "round":"Kolejka 3", "team1":"FIFA 1", "team2":"Uzbekistan", "date":"2026-06-28T01:30:00", "score1":null, "score2":null},
+  {"id":70, "round":"Kolejka 3", "team1":"Kolumbia", "team2":"Portugalia", "date":"2026-06-28T01:30:00", "score1":null, "score2":null},
+  {"id":71, "round":"Kolejka 3", "team1":"Algieria", "team2":"Austria", "date":"2026-06-28T04:00:00", "score1":null, "score2":null},
+  {"id":72, "round":"Kolejka 3", "team1":"Jordania", "team2":"Argentyna", "date":"2026-06-28T04:00:00", "score1":null, "score2":null},
   
   {"id":73, "round":"1/16 finału", "team1":"NULL", "team2":"NULL", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
   
@@ -233,11 +242,11 @@
   
   {"id":99, "round":"Ćwierćfinały", "team1":"NULL", "team2":"NULL", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
   
-  {"id":100, "round":"Ćwierćfinały", "team1":"NULL", "team2":"NULL", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
+  {"id":100, "round":"Ćwierćfinały", "team1":"Holandia", "team2":"NULL", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
   
   {"id":101, "round":"Półfinały", "team1":"NULL", "team2":"NULL", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
   
-  {"id":102, "round":"Półfinały", "team1":"NULL", "team2":"NULL", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
+  {"id":102, "round":"Półfinały", "team1":"Francja", "team2":"NULL", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
   
   {"id":103, "round":"Mecz o 3 miejsce", "team1":"NULL", "team2":"NULL", "date":"2026-12-18T15:00:00", "score1":null, "score2":null},
   
@@ -1422,5 +1431,38 @@ const matchDate = `${day}.${month}.${date.getFullYear()} ${hours}:${minutes}`;
 
     loadData();
   </script>
+  <script>
+function filterMatches() {
+  const input = document.getElementById("teamSearch").value.toLowerCase();
+  const matches = document.querySelectorAll(".match-row");
+  const rounds = document.querySelectorAll(".round-matches");
+
+  let anyVisible = false;
+
+  matches.forEach(match => {
+    const text = match.innerText.toLowerCase();
+
+    if (text.includes(input)) {
+      match.style.display = "";
+      anyVisible = true;
+    } else {
+      match.style.display = "none";
+    }
+  });
+
+  // Otwieranie tylko tych kolejek, gdzie są widoczne mecze
+  rounds.forEach(round => {
+    const visibleMatches = round.querySelectorAll(".match-row:not([style*='none'])");
+
+    if (visibleMatches.length > 0 && input !== "") {
+      round.classList.add("open");
+    } else if (input === "") {
+      round.classList.remove("open");
+    } else {
+      round.classList.remove("open");
+    }
+  });
+}
+</script>
 </body>
 </html>
