@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Typowanie Mistrzostw Świata 2026</title>
+  <title>Typowanie Mistrzostw Świata</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -82,6 +82,59 @@
       margin: 20px 0;
       font-weight: bold;
     }
+    /* ===== WORLD CUP 2026 HEADER ===== */
+
+.top-bar {
+  height: 6px;
+  background: linear-gradient(90deg, #0B2D5C, #C8102E, #006847);
+  margin: -20px -20px 20px -20px;
+}
+
+.hero {
+  text-align: center;
+  padding: 20px 0 10px 0;
+}
+
+.hero img {
+  max-width: 260px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+.hero h1 {
+  font-size: 2em;
+  margin: 5px 0;
+  color: #0B2D5C;
+}
+
+.hero-subtitle {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #333;
+}
+
+/* Nowa kolorystyka tabel */
+th {
+  background-color: #0B2D5C;
+}
+
+.round-header {
+  background-color: #0B2D5C;
+}
+
+.round-header:hover {
+  background-color: #09254a;
+}
+
+#final-winner {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  max-width: 500px;
+  margin: 20px auto;
+}
   </style>
 </head>
 <body>
@@ -256,7 +309,7 @@
   <script type="application/json" id="uczestnicy">[
     {"name":"Radek","winner":"Polska",
     "predictions":{
-"1": {"score1": null, "score2": null},
+"1": {"score1": 3, "score2": 1},
 "2": {"score1": null, "score2": null},
 "3": {"score1": null, "score2": null},
 "4": {"score1": null, "score2": null},
@@ -362,7 +415,7 @@
 "104": {"score1": null, "score2": null}}},
     {"name":"Weronika","winner":"Hiszpania",
     "predictions":{
-"1": {"score1": null, "score2": null},
+"1": {"score1": 2, "score2": 1},
 "2": {"score1": null, "score2": null},
 "3": {"score1": null, "score2": null},
 "4": {"score1": null, "score2": null},
@@ -1324,7 +1377,7 @@
 
   <script>
     // --- Tutaj wpisujesz zwycięzcę turnieju ---
-    const finalWinner = "null"; // <-- wpisz nazwę kraju
+    const finalWinner = "NULL"; // <-- wpisz nazwę kraju
 
     // Wczytanie krajów
     const kraje = JSON.parse(document.getElementById("kraje").textContent);
